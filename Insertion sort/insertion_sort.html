@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Sort</title>
+    <title>Insertion Sort</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="stylesheet" href="bubble_sort.css">
+    <link rel="stylesheet" href="insertion_sort.css">
     <link rel="stylesheet" href="/Navigation bar/nav.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +31,9 @@
         </nav> 
         <nav class="navbar2">
             <ul>
-                <li><a href="/Selection sort/selection_sort.html"><button class="sorts jura">Selection Sort</button></a></li>
-                <li><a href="/Bubble sort/bubble_sort.html"><button class="sorts tab-locator-clr jura">Bubble Sort</button></a> </li>
-                <li> <a href="/Insertion sort/insertion_sort.html"><button class="sorts jura ">Insertion Sort</button></a> </li>
+                <li><a href="/Selection sort/selection_sort.html"><button  class="sorts jura">Selection Sort</button></a></li>
+                <li><a href="/Bubble sort/bubble_sort.html"><button  class="sorts jura">Bubble Sort</button></a> </li>
+                <li> <a href="/Insertion sort/insertion_sort.html"><button  class="sorts tab-locator-clr jura">Insertion Sort</button></a> </li>
                 <li> <a href="/Merger sort/merge_sort.html"><button  class="sorts jura">Merge Sort</button></a> </li>
                 <li> <a href="/Quick sort/quick_sort.html"><button  class="sorts jura">Quick Sort</button></a> </li>
             </ul>
@@ -45,9 +45,10 @@
         <button onclick="topFunction()" id="TopBtn" title="Go to top">
             <ion-icon name="arrow-up-circle">Top</ion-icon>
         </button>
+
         <div class ="box">
             <div class="title-box"> 
-            <div id="title-txt">Bubble Sort</div>
+            <div id="title-txt">Insertion Sort</div>
             <br>
             <div class="slider-ctn" >
             <label for="Number" >Number of inputs:</label>
@@ -60,7 +61,7 @@
 
             <br>
             <div id="container" >
-            <script src="bubble_sort.js"></script>
+            <script src="insertion_sort.js"></script>
             </div>
             <div class="btn_container">
                 <button class="btn" onclick="reset()">Reset</button>
@@ -68,7 +69,10 @@
             </div>
             <h1>DESCRIPTION</h3><br>
             <p class="text">
-            Just like the way bubbles rise from the bottom of a glass, bubble sort is a simple algorithm that sorts a list, allowing either lower or higher values to bubble up to the top. The algorithm traverses a list and compares adjacent values, swapping them if they are not in the correct order.            <p class="text">It's a really simple and intuitive algorithm that does not require additional memory, but it's not really efficient on big data structures due to its quadratic time complexity.</p>
+                Insertion sort is a simple sorting algorithm that builds the final sorted array one item at a time. It's less performant than advanced sorting algorithms, but it can still have some advantages: it's really easy to implement and it's efficient on small data structures almost sorted.            
+            </p>
+            <p class="text">
+                The algorithm divides the data structure in two sublists: a sorted one, and one still to sort. Initially, the sorted sublist is made up of just one element and it gets progressively filled. For every iteration, the algorithm picks an element on the unsorted sublist and inserts it at the right place in the sorted sublist.            </p>
             <br><br>
             <h1>COMPLEXITY</h1><br>
             
@@ -95,42 +99,40 @@
 <div class="code-container">
     <div>
                 <h1>C++</h1>
-                <pre class="code"><code >void swap(int *a, int *b)
+                <pre class="code"><code >void InsertionSort(int arr[], int n)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-void BubbleSort(int arr[], int n)
-{
-    int i, j;
-    for (i = 0; i < n - 1; i++)
+    int i, key, j;
+    for (i = 1; i < n; i++) 
     {
-        for (j = 0; j < n-1-i; j++)
+        key = arr[i];
+        j = i - 1;
+
+        while (j >= 0 && arr[j] > key) 
         {
-            if (arr[j] > arr[j+1])
-            {
-                swap(&arr[j], &arr[j+1]);
-            }
+            arr[j + 1] = arr[j];
+            j = j - 1;
         }
+        arr[j + 1] = key;
     }
 }
 </div>
 </code></pre>
 <div>
                 <h1>Javascript</h1>
-                <pre class="code"><code >function BubbleSort(array) 
+                <pre class="code"><code >function InsertionSort(arr, n)
 {
-    for (let i = 0; i < array.length-1; i++) 
+    let i, key, j;
+    for (i = 1; i < n; i++)
     {
-        for (let j = 0; j < array.length-1-i; j++) 
+        key = arr[i];
+        j = i - 1;
+
+        while (j >= 0 && arr[j] > key)
         {
-            if (array[j] > array[j+1])
-            {
-                [array[j], array[j+1]] = [array[j+1], array[j]]; 
-            }
-        }                              
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
     }
 }
 </code></pre>
